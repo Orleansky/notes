@@ -10,6 +10,11 @@ import (
 	"strings"
 )
 
+type Result struct {
+	Word       string
+	Suggestion string
+}
+
 func decodeUnicode(s string) (string, error) {
 	re := regexp.MustCompile(`\\u([0-9a-fA-F]{4})`)
 	decodedStr := re.ReplaceAllStringFunc(s, func(match string) string {
@@ -27,10 +32,6 @@ func decodeUnicode(s string) (string, error) {
 
 func correctError(s string, text []string) ([]string, error) {
 	var strs []string
-	type Result struct {
-		Word       string
-		Suggestion string
-	}
 
 	results := []Result{}
 	var currentWord string
